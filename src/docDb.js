@@ -21,4 +21,9 @@ function addoc(nome) {
      return res;
 }
 
-export { encontrarDoc, attDocumento, obterDoc, addoc }
+function removeDoc(nome){
+     const res = documentos.deleteOne({nome})
+     return res;
+}
+
+export { encontrarDoc, attDocumento, obterDoc, addoc, removeDoc }

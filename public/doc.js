@@ -1,10 +1,11 @@
-import { emitir, selecionandoDoc } from "./socket-front-doc.js";
+import { emitir, excluirEmit, selecionandoDoc } from "./socket-front-doc.js";
 
-const parametros = new URLSearchParams(window.location.search)//pega todos os parametros da url
-const nomeDoc = parametros.get("nome"); // pega o conteudo do parametro nome da url
+const parametros = new URLSearchParams(window.location.search)
+const nomeDoc = parametros.get("nome");
 
-const textoEditor = document.getElementById("editor-texto"); //capturando o campo de texto do usuario
+const textoEditor = document.getElementById("editor-texto");
 const tituloDoc = document.getElementById("titulo-documento");
+const excluirDoc = document.getElementById("excluir-documento");
 
 tituloDoc.textContent = nomeDoc || "Documento sem Titulo"
 
@@ -21,4 +22,15 @@ function atualizaTextoEditor(texto) {
      textoEditor.value = texto
 }
 
-export { atualizaTextoEditor }
+excluirDoc.addEventListener("click", () => {
+     excluirEmit(nomeDoc)
+})
+
+function alertRedirecionar(nome) {
+     if (nome == nomeDoc) {
+          alert(`Documento ${nome} excluido com sucesso!`);
+          window.location.href = "/";
+     }
+}
+
+export { atualizaTextoEditor, alertRedirecionar }

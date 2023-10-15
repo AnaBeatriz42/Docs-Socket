@@ -1,4 +1,4 @@
-import { addoc, attDocumento, encontrarDoc, obterDoc } from "./docDb.js";
+import { addoc, attDocumento, encontrarDoc, obterDoc, removeDoc } from "./docDb.js";
 import io from "./servidor.js"
 
 
@@ -41,6 +41,14 @@ io.on("connection", (socket) => {
     if (documento.modifiedCount) {
       socket.to(nomeDoc).emit("escrevendo", texto);
     }
+  })
+
+  socket.on("excluindo-doc", async (nome) => {
+    const documento = await removeDoc(nome)
+    if (documento.deletedCount) {
+      io.emit("sucessos-excluir", nome);
+    }
+
   })
 
 });
