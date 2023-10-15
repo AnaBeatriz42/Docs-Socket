@@ -6,8 +6,19 @@ function encontrarDoc(nome) {
      return document
 }
 
-function attDocumento(nome, texto){
-     const att = documentos.updateOne({nome},{$set:{texto:texto}})
+function attDocumento(nome, texto) {
+     const att = documentos.updateOne({ nome }, { $set: { texto: texto } })
      return att
 }
-export { encontrarDoc , attDocumento }
+
+function obterDoc() {
+     const docuemntos = documentos.find().toArray();
+     return docuemntos;
+}
+
+function addoc(nome) {
+     const res = documentos.insertOne({ nome, texto: "" })
+     return res;
+}
+
+export { encontrarDoc, attDocumento, obterDoc, addoc }

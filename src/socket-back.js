@@ -1,9 +1,31 @@
-import { attDocumento, encontrarDoc } from "./docDb.js";
+import { addoc, attDocumento, encontrarDoc, obterDoc } from "./docDb.js";
 import io from "./servidor.js"
 
 
 io.on("connection", (socket) => {
   console.log("Um cliente se conectou! ID:", socket.id);
+
+  socket.on("obter_doc", async (devolverDoc) => {
+
+    console.log("solicitando os documentos do banco")
+    const documentos = await obterDoc();
+    console.log(documentos)
+    devolverDoc(documentos)
+  })
+
+
+  socket.on("add-documento", async (nome) => {
+    const docExiste = await (encontrarDoc(nome)) !== null;
+    if (docExiste) {
+      socket.emit("doc-existe", nome);
+    } else {
+      const result = await addoc(nome)
+      if (result.acknowledged) {
+        io.emit("adicionado", nome)
+      }
+    }
+
+  })
 
   socket.on("selecionando_doc", async (nome, callback) => {
     socket.join(nome)
@@ -20,6 +42,7 @@ io.on("connection", (socket) => {
       socket.to(nomeDoc).emit("escrevendo", texto);
     }
   })
+
 });
 
 
