@@ -1,6 +1,6 @@
 import { atualizaTextoEditor } from "./doc.js";
 
-const socket = io(); //emitindo para o backend uma entrada no front 
+const socket = io();
 
 function selecionandoDoc(nome) {
      socket.emit("selecionando_doc", nome,(texto) =>{
@@ -12,7 +12,7 @@ function emitir(dados) {
      socket.emit("texto_editor", dados);   
 }
 
-socket.on("escrevendo", (res) => { //ouvindo o evento emitido pelo back
+socket.on("escrevendo", (res) => { 
      atualizaTextoEditor(res)
 })
 export { emitir, selecionandoDoc }

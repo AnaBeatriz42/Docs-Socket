@@ -10,7 +10,7 @@ tituloDoc.textContent = nomeDoc || "Documento sem Titulo"
 
 selecionandoDoc(nomeDoc)
 
-textoEditor.addEventListener("keyup", () => { //atribuindo evento no campo selecionado sempre que o usuario soltar uma teclar (keyup)
+textoEditor.addEventListener("keyup", () => {
      emitir({
           texto: textoEditor.value,
           nomeDoc,

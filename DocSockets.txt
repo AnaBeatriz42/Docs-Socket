@@ -1,0 +1,6 @@
+DocSockets
+ nome de usuario do banco de dados:  admim senha: admin2342
+
+FORMA DE CONEXÃO DO BANCO COM UMA APLICAÇÃO NODE:
+https://www.mongodb.com/docs/drivers/node/current/
+
