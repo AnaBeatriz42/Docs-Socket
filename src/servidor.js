@@ -4,10 +4,10 @@ import path from "path";
 import http  from 'http';
 import {Server} from "socket.io"
 
-import "./dbConnect.js";
+import "./db/dbConnect.js";
 
 const app = express()
-const port = process.env.port || 3000;
+const port = process.env.port || 8080;
 
 const caminhoAtual = url.fileURLToPath(import.meta.url);
 const diretorioPublico = path.join(caminhoAtual, "../..", "public");
