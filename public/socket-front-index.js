@@ -1,9 +1,18 @@
 import { inserirLinkDocumento, removerLinkDocumento } from "./index.js";
+import { obterToken } from "./utils/cookies.js";
 
-const socket = io();
+const socket = io("/usuarios",{
+     auth: {
+          token: obterToken("token")
+     }
+});
+
+socket.on("connect_error", (error) => {
+     alert(error)
+     window.location.href = "/login/index.html";
+})
 
 socket.emit("obter_doc", (documentos) => {
-     console.log(documentos)
      documentos.forEach((documento) => {
           inserirLinkDocumento(documento.nome)
      })

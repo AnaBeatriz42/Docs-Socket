@@ -3,9 +3,9 @@ import { addoc, encontrarDoc, obterDoc, } from "../db/docDb.js";
 function registrarEventosInicio(socket, io) {
      socket.on("obter_doc", async (devolverDoc) => {
 
-          console.log("solicitando os documentos do banco")
+          // console.log("solicitando os documentos do banco")
           const documentos = await obterDoc();
-          console.log(documentos)
+          // console.log(documentos)
           devolverDoc(documentos)
      })
 
